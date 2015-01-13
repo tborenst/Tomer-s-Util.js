@@ -321,3 +321,40 @@ Util.include = (function(){
 
 	return include;
 })();
+
+/**
+ * Util.browser
+ * Returns {chrome: bool, firefox: bool, safari: bool, other: bool}.
+ * Utilizes code from http://stackoverflow.com/questions/2400935/browser-detection-in-javascript
+ ***/
+Util.browser = function(){
+	var name = (function(){
+	    var ua= navigator.userAgent, tem, 
+	    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+	    if(/trident/i.test(M[1])){
+	        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+	        return 'IE '+(tem[1] || '');
+	    }
+	    if(M[1]=== 'Chrome'){
+	        tem= ua.match(/\bOPR\/(\d+)/)
+	        if(tem!= null) return 'Opera '+tem[1];
+	    }
+	    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+	    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+	    return M.join(' ');
+	})();
+	name = name.toLowerCase();
+
+	var result = {chrome: false, firefox: false, safari: false, other: false};
+	if(name.indexOf("chrome") !== -1){
+		result.chrome = true;
+	} else if(name.indexOf("firefox")){
+		result.firefox = true;
+	} else if(name.indexOf("safari")){
+		result.safari = true;
+	} else {
+		result.other = true;
+	}
+
+	return result;
+}
