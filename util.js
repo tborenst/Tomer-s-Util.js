@@ -348,9 +348,9 @@ Util.browser = function(){
 	var result = {chrome: false, firefox: false, safari: false, other: false};
 	if(name.indexOf("chrome") !== -1){
 		result.chrome = true;
-	} else if(name.indexOf("firefox")){
+	} else if(name.indexOf("firefox") !== -1){
 		result.firefox = true;
-	} else if(name.indexOf("safari")){
+	} else if(name.indexOf("safari") !== -1){
 		result.safari = true;
 	} else {
 		result.other = true;
